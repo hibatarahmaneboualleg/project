@@ -1,10 +1,789 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
-  <title>Projects</title>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriFuture | الدعم التقني للفلاحة الذكية</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8faf8;
+            color: #1a3a2a;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: #2d6a4f;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            color: #2d6a4f;
+        }
+
+        .logo-text p {
+            font-size: 0.7rem;
+            color: #666;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1a3a2a;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #2d6a4f;
+        }
+
+        .btn-login {
+            background: #2d6a4f;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn-login:hover {
+            background: #1b4d3e;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1400&auto=format');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 5%;
+            margin-top: 70px;
+        }
+
+        .hero-content h2 {
+            font-size: 1.2rem;
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h1 span {
+            color: #95d5b2;
+        }
+
+        .hero-content p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.2rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: #2d6a4f;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-outline {
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #2d6a4f;
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
+            padding: 1.2rem;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 1.8rem;
+            color: #95d5b2;
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 5%;
+        }
+
+        .section-dark {
+            background: #e8f5e9;
+        }
+
+        .section-light {
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #2d6a4f;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            color: #2d6a4f;
+            margin-bottom: 1rem;
+        }
+
+        /* Two columns */
+        .two-columns {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .problem-box {
+            background: #ffebee;
+            padding: 1.5rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .solution-box {
+            background: #e8f5e9;
+            padding: 1.5rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Team */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            background: #2d6a4f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1rem;
+            color: white;
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #2d6a4f;
+            color: white;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a3a2a;
+            color: white;
+            padding: 3rem 5% 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links {
+                justify-content: center;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .two-columns {
+                grid-template-columns: 1fr;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
 <body>
-  <h1>My Projects</h1>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-icon">🌱</div>
+            <div class="logo-text">
+                <h1>AgriFuture</h1>
+                <p>الزراعة الذكية الحديثة</p>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="#home">الرئيسية</a>
+            <a href="#problem">فكرة المشروع</a>
+            <a href="#services">الخدمات</a>
+            <a href="#objectives">الأهداف</a>
+            <a href="#innovation">الابتكارات</a>
+            <a href="#analysis">التحليل الاستراتيجي</a>
+            <a href="#team">الفريق</a>
+            <a href="#finance">الخطة المالية</a>
+        </div>
+        <button class="btn-login">تسجيل الدخول</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h2>🌾 مستقبل الزراعة الذكية يبدأ من هنا</h2>
+            <h1>AgriFuture <span>الدعم التقني والشامل للفلاحة الذكية</span></h1>
+            <p>منصة متكاملة تعتمد على الذكاء الاصطناعي وإنترنت الأشياء وتحليل البيانات لتحسين الإنتاج الزراعي، مراقبة المحاصيل، إدارة الموارد، وتسهيل اتخاذ القرارات.</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">🚀 ابدأ الآن مجاناً</a>
+                <a href="#services" class="btn-outline">📖 تعرف على خدماتنا</a>
+            </div>
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>+12K</h3>
+                    <p>مزارع نشط</p>
+                </div>
+                <div class="stat-card">
+                    <h3>+45K</h3>
+                    <p>محصول ناجح</p>
+                </div>
+                <div class="stat-card">
+                    <h3>+85</h3>
+                    <p>خبير زراعي</p>
+                </div>
+                <div class="stat-card">
+                    <h3>95%</h3>
+                    <p>رضا المستخدمين</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- فكرة المشروع (المشكلة والحل) -->
+    <section id="problem" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">📌 فكرة المشروع</h2>
+            <p class="section-subtitle">المشكلة التي نواجهها والحلول المبتكرة التي نقدمها</p>
+            <div class="two-columns">
+                <div>
+                    <h3 style="color:#c62828; margin-bottom:1.5rem;">⚠️ المشكلة</h3>
+                    <div class="problem-box">
+                        <span style="font-size:2rem;">📉</span>
+                        <p>نقص الدعم التقني والخبرة المتخصصة في استخدام التقنيات الحديثة</p>
+                    </div>
+                    <div class="problem-box">
+                        <span style="font-size:2rem;">💧</span>
+                        <p>ندرة المياه وعدم ترشيد استهلاكها في الري التقليدي</p>
+                    </div>
+                    <div class="problem-box">
+                        <span style="font-size:2rem;">📊</span>
+                        <p>ضعف الإنتاجية بسبب عدم متابعة المحاصيل بشكل دقيق</p>
+                    </div>
+                    <div class="problem-box">
+                        <span style="font-size:2rem;">🔄</span>
+                        <p>مقاومة التغيير والتمسك بالطرق التقليدية</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color:#2d6a4f; margin-bottom:1.5rem;">✅ الحل المقترح</h3>
+                    <div class="solution-box">
+                        <span style="font-size:2rem;">🛠️</span>
+                        <p>دعم تقني متكامل ومرافقة مستمرة للفلاحين</p>
+                    </div>
+                    <div class="solution-box">
+                        <span style="font-size:2rem;">💧</span>
+                        <p>أنظمة ري ذكية تقلل استهلاك المياه حتى 40%</p>
+                    </div>
+                    <div class="solution-box">
+                        <span style="font-size:2rem;">🚁</span>
+                        <p>مراقبة المحاصيل عبر حساسات ودرون وتحليل بالذكاء الاصطناعي</p>
+                    </div>
+                    <div class="solution-box">
+                        <span style="font-size:2rem;">📚</span>
+                        <p>توعية وتكوين مستمر لتبني التكنولوجيا الحديثة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الخدمات حسب المذكرة -->
+    <section id="services" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">🌟 خدماتنا</h2>
+            <p class="section-subtitle">حلول تقنية متكاملة للفلاحة الذكية</p>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">💧</div>
+                    <h3>أنظمة الري الذكي</h3>
+                    <p>تحكم ذكي في الري باستخدام حساسات الرطوبة، تقليل استهلاك المياه بنسبة تصل إلى 40%</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🚁</div>
+                    <h3>مراقبة المحاصيل بالدرون</h3>
+                    <p>طائرات بدون طيار لمراقبة المحاصيل، اكتشاف الأمراض مبكراً، وتحليل صحة النباتات</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">👨‍🌾</div>
+                    <h3>الاستشارات الزراعية</h3>
+                    <p>فريق من الخبراء الزراعيين يقدمون استشارات فورية عبر المنصة أو ميدانياً</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3>تحليل البيانات</h3>
+                    <p>تحليل بيانات زراعية دقيقة لتقديم توصيات ذكية لتحسين الإنتاجية</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- أهداف المشروع حسب المذكرة -->
+    <section id="objectives" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">🎯 أهداف المشروع</h2>
+            <p class="section-subtitle">ماذا نطمح إلى تحقيقه؟</p>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">📈</div>
+                    <h3>تحسين الإنتاجية الزراعية</h3>
+                    <p>زيادة المردودية وتحسين جودة المحاصيل باستخدام أنظمة حديثة</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💧</div>
+                    <h3>ترشيد استخدام الموارد الطبيعية</h3>
+                    <p>تحسين استغلال المياه والحفاظ على الموارد</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💰</div>
+                    <h3>تقليل التكاليف</h3>
+                    <p>خفض الخسائر الناتجة عن سوء التسيير وزيادة الكفاءة الاقتصادية</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🌍</div>
+                    <h3>دعم التنمية المستدامة</h3>
+                    <p>تحقيق توازن بين الإنتاج الزراعي والحفاظ على البيئة</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💻</div>
+                    <h3>دعم التحول الرقمي</h3>
+                    <p>إدماج التقنيات الحديثة في النشاط الزراعي</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">👥</div>
+                    <h3>خلق فرص عمل جديدة</h3>
+                    <p>توفير مناصب شغل في مجالات التكنولوجيا والدعم التقني والخدمات الفلاحية</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الابتكارات حسب المذكرة -->
+    <section id="innovation" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">💡 الابتكارات</h2>
+            <p class="section-subtitle">طبيعة الابتكارات في مشروعنا</p>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">🤖</div>
+                    <h3>الابتكار التكنولوجي</h3>
+                    <p>استعمال حساسات الرطوبة التربة المرتبطة بقاعدة البيانات للتحكم في السقي</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📦</div>
+                    <h3>الابتكار في النماذج التجارية</h3>
+                    <p>اشتراك شهري للفلاحين لاستخدام منصة رقمية للمراقبة بدل بيع النظام مرة واحدة</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📱</div>
+                    <h3>الابتكار في تجربة المستخدم</h3>
+                    <p>تطبيق بسيط يعطي تنبيهات فورية للفلاح حول وقت السقي وتنبؤ بالأمراض</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🤝</div>
+                    <h3>الابتكار في العلاقات المهنية</h3>
+                    <p>منصة تربط الفلاح مباشرة مع مهندس فلاحي عبر تطبيق</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏪</div>
+                    <h3>الابتكار في السوق</h3>
+                    <p>تطبيق يمكن الفلاح من عرض محصوله والتواصل مع التاجر مباشرة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- التحليل الاستراتيجي PESTEL + SWOT -->
+    <section id="analysis" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">📊 التحليل الاستراتيجي للسوق</h2>
+            
+            <h3 style="color:#2d6a4f; margin: 2rem 0 1rem;">تحليل PESTEL</h3>
+            <div class="cards-grid" style="margin-bottom:2rem;">
+                <div class="card"><h3>سياسي</h3><p>دعم الدولة للتحول الرقمي في الفلاحة، تشجيع الاستثمار في التكنولوجيا</p></div>
+                <div class="card"><h3>اقتصادي</h3><p>ارتفاع تكاليف الإنتاج التقليدي يدفع نحو حلول أكثر كفاءة</p></div>
+                <div class="card"><h3>اجتماعي</h3><p>تفاوت في تقبل التكنولوجيا، التركيز على التوعية والتكوين</p></div>
+                <div class="card"><h3>تكنولوجي</h3><p>تطور تقنيات إنترنت الأشياء والذكاء الاصطناعي</p></div>
+                <div class="card"><h3>بيئي</h3><p>التغييرات المناخية وندرة المياه، المشروع يساعد في ترشيد الموارد</p></div>
+                <div class="card"><h3>قانوني</h3><p>قوانين دعم الاستثمار الزراعي، احترام المعايير التقنية</p></div>
+            </div>
+
+            <h3 style="color:#2d6a4f; margin: 2rem 0 1rem;">تحليل SWOT</h3>
+            <div class="two-columns">
+                <div>
+                    <h3 style="color:#2d6a4f;">💪 نقاط القوة</h3>
+                    <ul style="list-style:none; padding:0;">
+                        <li style="padding:0.5rem 0;">✅ دمج التكنولوجيا الحديثة</li>
+                        <li style="padding:0.5rem 0;">✅ تحسين الإنتاجية وترشيد الموارد</li>
+                        <li style="padding:0.5rem 0;">✅ طلب كامن في السوق</li>
+                        <li style="padding:0.5rem 0;">✅ دعم تقني مستمر</li>
+                    </ul>
+                    <h3 style="color:#c62828; margin-top:1.5rem;">⚠️ نقاط الضعف</h3>
+                    <ul style="list-style:none; padding:0;">
+                        <li style="padding:0.5rem 0;">❌ ضعف الوعي التكنولوجي</li>
+                        <li style="padding:0.5rem 0;">❌ استثمارات أولية مرتفعة</li>
+                        <li style="padding:0.5rem 0;">❌ الاعتماد على الاستيراد</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color:#2d6a4f;">🌱 الفرص</h3>
+                    <ul style="list-style:none; padding:0;">
+                        <li style="padding:0.5rem 0;">📈 تزايد الاهتمام بالرقمنة الزراعية</li>
+                        <li style="padding:0.5rem 0;">🏛️ برامج الدعم الحكومي</li>
+                        <li style="padding:0.5rem 0;">🌍 سوق غير مشبع</li>
+                    </ul>
+                    <h3 style="color:#c62828; margin-top:1.5rem;">⚡ التهديدات</h3>
+                    <ul style="list-style:none; padding:0;">
+                        <li style="padding:0.5rem 0;">🔥 دخول منافسين جدد</li>
+                        <li style="padding:0.5rem 0;">🔄 تمسك الفلاحين بالطرق التقليدية</li>
+                        <li style="padding:0.5rem 0;">📉 تقلبات أسعار المعدات المستوردة</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفريق حسب المذكرة -->
+    <section id="team" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">👥 فريق العمل</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">👨‍🏫</div>
+                    <h3>طارق خوجة هشام</h3>
+                    <p>المشرف الرئيسي</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">👨‍🌾</div>
+                    <h3>بوغرارة سفيان</h3>
+                    <p>طالب - تخصص مالية</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">👨‍🌾</div>
+                    <h3>بوعشة عبد الرحمان</h3>
+                    <p>طالب - تخصص مالية</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">👨‍🌾</div>
+                    <h3>عباسي محمد أمير</h3>
+                    <p>طالب - تخصص مالية</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الخطة المالية حسب المذكرة -->
+    <section id="finance" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">💰 الخطة المالية</h2>
+            
+            <h3 style="color:#2d6a4f; margin: 2rem 0 1rem;">📊 الميزانية التقديرية</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr><th>البيان</th><th>المبلغ (دج)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>برمجيات الذكاء الاصطناعي والمنصات</td><td>1,500,000</td></tr>
+                        <tr><td>تطوير منصة التحكم والمراقبة الذكية</td><td>800,000</td></tr>
+                        <tr><td>تطوير منصة التحكم والمراقبة الذكية (جزء ثان)</td><td>700,000</td></tr>
+                        <tr><td>معدات تقنية وتجهيزات ذكية</td><td>3,200,000</td></tr>
+                        <tr><td>طائرات درون بحساسات</td><td>1,200,000</td></tr>
+                        <tr><td>محطات استشعار ووحدات ربط</td><td>1,000,000</td></tr>
+                        <tr><td>أجهزة إعلام (حواسيب)</td><td>1,000,000</td></tr>
+                        <tr style="background:#e8f5e9; font-weight:bold;"><td>المجموع</td><td>9,400,000</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 style="color:#2d6a4f; margin: 2rem 0 1rem;">📈 جدول حسابات النتائج</h3>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>البيان</th><th>المبلغ (دج)</th></tr></thead>
+                    <tbody>
+                        <tr><td>خدمات درون</td><td>25,000,000</td></tr>
+                        <tr><td>التسويق والإطلاق</td><td>3,000,000</td></tr>
+                        <tr><td>مصاريف الصيانة والإنترنت</td><td>350,000</td></tr>
+                        <tr><td>مصاريف متنوعة</td><td>150,000</td></tr>
+                        <tr><td>الاستهلاكات</td><td>640,000</td></tr>
+                        <tr><td>الأجور والرواتب</td><td>2,400,000</td></tr>
+                        <tr><td>مصاريف مالية</td><td>320,000</td></tr>
+                        <tr style="background:#e8f5e9; font-weight:bold;"><td>صافي الربح</td><td>4,560,000</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 style="color:#2d6a4f; margin: 2rem 0 1rem;">📅 جدول النفقات الشهرية</h3>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>الشهر</th><th>الإيرادات (دج)</th><th>النفقات (دج)</th></tr></thead>
+                    <tbody>
+                        <tr><td>جانفي</td><td>326.6</td><td>50,000</td></tr>
+                        <tr><td>فيفري</td><td>326.6</td><td>50,000</td></tr>
+                        <tr><td>مارس</td><td>326.6</td><td>50,000</td></tr>
+                        <tr><td>أفريل</td><td>326.6</td><td>50,000</td></tr>
+                        <tr><td>ماي</td><td>326.7</td><td>50,000</td></tr>
+                        <tr><td>جوان</td><td>326.6</td><td>50,050</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- الجدول الزمني -->
+    <section class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">⏰ الجدول الزمني للمشروع</h2>
+            <div class="cards-grid">
+                <div class="card"><h3>📋 مرحلة الدراسة والتحليل</h3><p>2-3 أسابيع</p><small>دراسة واقع الفلاحة في الجزائر، معرفة السوق والمنافسين</small></div>
+                <div class="card"><h3>📝 مرحلة التخطيط والتنظيم</h3><p>أسبوعين</p><small>إعداد خطة العمل، تحديد الهيكل التنظيمي، توزيع المهام</small></div>
+                <div class="card"><h3>💻 مرحلة تطوير الحلول التقنية</h3><p>شهرين</p><small>تصميم وتطوير منصة رقمية وتطبيق، إعداد الأنظمة التقنية</small></div>
+                <div class="card"><h3>🔧 مرحلة اقتناء وتجهيز الموارد</h3><p>شهر</p><small>شراء الأجهزة اللازمة (درون، أجهزة ذكية)، توظيف وتكوين فريق تقني</small></div>
+                <div class="card"><h3>📢 مرحلة التسويق والتحسين</h3><p>3 أسابيع</p><small>إعداد حملات تسويقية للتعريف بالمؤسسة</small></div>
+                <div class="card"><h3>🧪 مرحلة الإطلاق التجريبي</h3><p>3 أسابيع</p><small>إطلاق تجريبي لجمع الملاحظات وتحسين الأداء</small></div>
+                <div class="card"><h3>🚀 مرحلة الإطلاق الرسمي</h3><p>مستمر</p><small>الإطلاق الرسمي للمشروع والتوسع في النشاط</small></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الشركاء -->
+    <section class="section section-light">
+        <div class="container">
+            <h2 class="section-title">🤝 شركاؤنا الرئيسيون</h2>
+            <div class="cards-grid">
+                <div class="card"><h3>شركات تكنولوجيا المعلومات</h3><p>تطوير وصيانة المنصة، تكامل تقنيات الذكاء الاصطناعي</p></div>
+                <div class="card"><h3>مزودو خدمات الدفع الإلكتروني</h3><p>بريد الجزائر، البطاقات الذهبية لتسهيل عملية الدفع</p></div>
+                <div class="card"><h3>مكاتب استشارات فلاحية وخبراء</h3><p>توسيع شبكة الخبراء في الري، التسميد، الأمراض الفلاحية</p></div>
+                <div class="card"><h3>شركات التسويق الرقمي</h3><p>الترويج للمنصة بين الفلاحين والمستثمرين</p></div>
+                <div class="card"><h3>حاضنات الأعمال</h3><p>مرافقة قانونية ومالية من الوكالة الوطنية للمقاولاتية</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h3 style="font-size:1.5rem;">🌱 AgriFuture</h3>
+                <p>منصة رقمية متكاملة لبناء مستقبل زراعي أكثر ذكاءً واستدامة.</p>
+            </div>
+            <div>
+                <h4>روابط سريعة</h4>
+                <p>الرئيسية | الخدمات | الأهداف | الفريق</p>
+            </div>
+            <div>
+                <h4>تواصل معنا</h4>
+                <p>📧 contact@agrifuture.com</p>
+                <p>📞 +213 000 000 000</p>
+                <p>📍 سوق أهراس، الجزائر</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 AgriFuture — جميع الحقوق محفوظة. جامعة محمد الشريف مساعدية – سوق أهراس</p>
+        </div>
+    </footer>
+
 </body>
 </html>
