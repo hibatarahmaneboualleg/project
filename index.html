@@ -23,7 +23,6 @@
             font-family: 'Cairo', sans-serif;
         }
         
-        /* تدرجات مخصصة */
         .hero-gradient {
             background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 30%, #bbf7d0 70%, #86efac 100%);
         }
@@ -37,19 +36,6 @@
             box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.2);
         }
         
-        .img-icon {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            margin: 0 auto 1rem;
-            transition: transform 0.3s;
-        }
-        
-        .card-hover:hover .img-icon {
-            transform: scale(1.1);
-        }
-        
-        /* شريط الإحصائيات */
         .stat-number {
             font-size: 2.5rem;
             font-weight: 800;
@@ -59,28 +45,23 @@
             color: transparent;
         }
         
-        /* تنسيق السكرول */
         ::-webkit-scrollbar {
             width: 8px;
         }
-        
         ::-webkit-scrollbar-track {
             background: #e5e7eb;
             border-radius: 10px;
         }
-        
         ::-webkit-scrollbar-thumb {
             background: #22c55e;
             border-radius: 10px;
         }
         
-        /* تأثير الظل */
         .glass-effect {
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
         }
         
-        /* نبض للدرون */
         @keyframes soft-bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
@@ -89,15 +70,22 @@
         .drone-animate {
             animation: soft-bounce 3s ease-in-out infinite;
         }
+        
+        .image-gallery img {
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        .image-gallery img:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
 
-    <!-- ==================== HEADER / NAVBAR محسن ==================== -->
+    <!-- ==================== HEADER / NAVBAR ==================== -->
     <nav class="glass-effect shadow-lg fixed w-full z-50 top-0 border-b border-green-100">
         <div class="container mx-auto px-4 md:px-6 py-3">
             <div class="flex items-center justify-between flex-wrap gap-4">
-                <!-- Logo -->
                 <div class="flex items-center gap-3 group cursor-pointer">
                     <img src="https://cdn-icons-png.flaticon.com/512/628/628283.png" alt="Logo" class="w-12 h-12 transition-transform group-hover:scale-105">
                     <div>
@@ -106,19 +94,17 @@
                     </div>
                 </div>
                 
-                <!-- Navigation -->
                 <div class="hidden md:flex gap-8 text-gray-700 font-semibold">
-                    <a href="#home" class="hover:text-green-600 transition duration-300">الرئيسية</a>
-                    <a href="#services" class="hover:text-green-600 transition duration-300">خدماتنا</a>
-                    <a href="#resources" class="hover:text-green-600 transition duration-300">إدارة الموارد</a>
-                    <a href="#stats-prod" class="hover:text-green-600 transition duration-300">التحليلات</a>
-                    <a href="#about" class="hover:text-green-600 transition duration-300">عن المشروع</a>
+                    <a href="#home" class="hover:text-green-600 transition">الرئيسية</a>
+                    <a href="#services" class="hover:text-green-600 transition">خدماتنا</a>
+                    <a href="#resources" class="hover:text-green-600 transition">إدارة الموارد</a>
+                    <a href="#gallery" class="hover:text-green-600 transition">معرض الصور</a>
+                    <a href="#stats-prod" class="hover:text-green-600 transition">التحليلات</a>
                 </div>
                 
-                <!-- Buttons -->
                 <div class="flex items-center gap-4">
                     <img src="https://cdn-icons-png.flaticon.com/512/2489/2489756.png" alt="Payment" class="w-8 h-8 hidden sm:block opacity-70 hover:opacity-100 transition">
-                    <button class="px-5 py-2 bg-gradient-to-r from-green-600 to-green-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                    <button class="px-5 py-2 bg-gradient-to-r from-green-600 to-green-500 text-white font-semibold rounded-xl hover:shadow-lg transition transform hover:scale-105">
                         <i class="fas fa-user ml-2"></i>ابدأ الآن
                     </button>
                 </div>
@@ -126,12 +112,11 @@
         </div>
     </nav>
 
-    <!-- ==================== HERO SECTION محسن ==================== -->
+    <!-- ==================== HERO SECTION ==================== -->
     <section id="home" class="pt-32 pb-20 hero-gradient overflow-hidden">
         <div class="container mx-auto px-4 md:px-6">
             <div class="flex flex-col lg:flex-row items-center gap-12">
                 <div class="flex-1 text-right" data-aos="fade-left">
-                    <!-- شارة ترحيب -->
                     <div class="inline-block bg-white/60 backdrop-blur-sm rounded-full px-4 py-1 mb-6 border border-green-200">
                         <span class="text-green-700 text-sm font-bold">🌱 مستقبل الزراعة يبدأ من هنا</span>
                     </div>
@@ -147,7 +132,7 @@
                     </p>
                     
                     <div class="flex flex-wrap items-center gap-6">
-                        <button class="px-8 py-3 bg-gradient-to-r from-green-600 to-green-500 text-white rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                        <button class="px-8 py-3 bg-gradient-to-r from-green-600 to-green-500 text-white rounded-2xl font-bold shadow-lg hover:shadow-xl transition transform hover:scale-105">
                             <i class="fas fa-rocket ml-2"></i>اطلب عرضاً
                         </button>
                         <div class="flex items-center gap-3 group cursor-pointer">
@@ -162,13 +147,11 @@
                          alt="Drone"
                          class="w-full max-w-md mx-auto drop-shadow-2xl drone-animate">
                     
-                    <!-- بطاقة معلقة -->
                     <div class="absolute top-0 left-0 bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-xl border border-green-100">
                         <p class="text-xs text-gray-500 font-bold">المسح الجوي</p>
                         <p class="text-xl font-black text-green-600">دقة 4K</p>
                     </div>
                     
-                    <!-- بطاقة ثانية -->
                     <div class="absolute bottom-10 -left-5 bg-white/90 backdrop-blur-sm p-3 rounded-2xl shadow-xl border border-green-100">
                         <div class="flex items-center gap-2">
                             <i class="fas fa-chart-line text-green-600"></i>
@@ -180,7 +163,7 @@
         </div>
     </section>
 
-    <!-- ==================== STATS BAR (جديد حسب المذكرة) ==================== -->
+    <!-- ==================== STATS BAR ==================== -->
     <section class="py-12 bg-white shadow-md">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -204,7 +187,7 @@
         </div>
     </section>
 
-    <!-- ==================== SERVICES SECTION (موسع) ==================== -->
+    <!-- ==================== SERVICES SECTION ==================== -->
     <section id="services" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16" data-aos="fade-up">
@@ -214,36 +197,32 @@
             </div>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- خدمة 1 -->
-                <div class="group bg-gradient-to-br from-white to-gray-50 rounded-3xl p-6 shadow-lg border border-green-100 card-hover text-center" data-aos="fade-up" data-aos-delay="0">
-                    <div class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:bg-green-600 transition duration-300">
+                <div class="group bg-gradient-to-br from-white to-gray-50 rounded-3xl p-6 shadow-lg border border-green-100 card-hover text-center" data-aos="fade-up">
+                    <div class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:bg-green-600 transition">
                         <img src="https://cdn-icons-png.flaticon.com/512/4148/4148401.png" alt="Irrigation" class="w-12 h-12">
                     </div>
                     <h3 class="text-xl font-bold text-green-800 mb-3">الري الذكي</h3>
                     <p class="text-gray-500 text-sm">تحكم ذكي في الري باستخدام حساسات الرطوبة، تقليل استهلاك المياه بنسبة تصل إلى 40%</p>
                 </div>
 
-                <!-- خدمة 2 -->
                 <div class="group bg-gradient-to-br from-white to-gray-50 rounded-3xl p-6 shadow-lg border border-green-100 card-hover text-center" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:bg-green-600 transition duration-300">
+                    <div class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:bg-green-600 transition">
                         <img src="https://cdn-icons-png.flaticon.com/512/2541/2541656.png" alt="Sensors" class="w-12 h-12">
                     </div>
                     <h3 class="text-xl font-bold text-green-800 mb-3">حساسات التربة</h3>
                     <p class="text-gray-500 text-sm">قياس رطوبة التربة، درجة الحرارة، والمغذيات بدقة عالية</p>
                 </div>
 
-                <!-- خدمة 3 -->
                 <div class="group bg-gradient-to-br from-white to-gray-50 rounded-3xl p-6 shadow-lg border border-green-100 card-hover text-center" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:bg-green-600 transition duration-300">
+                    <div class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:bg-green-600 transition">
                         <img src="https://cdn-icons-png.flaticon.com/512/2741/2741212.png" alt="Analytics" class="w-12 h-12">
                     </div>
                     <h3 class="text-xl font-bold text-green-800 mb-3">تحليل البيانات</h3>
                     <p class="text-gray-500 text-sm">تحليل بيانات زراعية دقيقة لتقديم توصيات ذكية لتحسين الإنتاجية</p>
                 </div>
 
-                <!-- خدمة 4: مراقبة المحاصيل بالدرون (جديد) -->
                 <div class="group bg-gradient-to-br from-white to-gray-50 rounded-3xl p-6 shadow-lg border border-green-100 card-hover text-center" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:bg-green-600 transition duration-300">
+                    <div class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:bg-green-600 transition">
                         <img src="https://cdn-icons-png.flaticon.com/512/3063/3063814.png" alt="Drone" class="w-12 h-12">
                     </div>
                     <h3 class="text-xl font-bold text-green-800 mb-3">مراقبة بالدرون</h3>
@@ -281,10 +260,96 @@
         </div>
     </section>
 
-    <!-- ==================== DASHBOARD SECTION ==================== -->
-    <section id="stats-prod" class="py-20 bg-white">
+    <!-- ==================== GALLERY SECTION (معرض صور عالية الجودة) ==================== -->
+    <section id="gallery" class="py-20 bg-white">
         <div class="container mx-auto px-4">
-            <div class="bg-gradient-to-br from-gray-50 to-white rounded-[3rem] shadow-2xl p-8 md:p-12 border border-green-100" data-aos="fade-up">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="bg-green-100 text-green-700 px-4 py-1 rounded-full text-sm font-bold">معرض الصور</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-green-900 mt-4">صور وتقنيات حديثة</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto mt-4">أحدث التقنيات المستخدمة في الفلاحة الذكية</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 image-gallery">
+                <!-- صورة 1: درون في حقل -->
+                <div class="overflow-hidden rounded-2xl shadow-lg" data-aos="zoom-in">
+                    <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=500&h=400&fit=crop" 
+                         alt="Drone فوق الحقل الزراعي"
+                         class="w-full h-64 object-cover cursor-pointer hover:scale-110 transition duration-500">
+                    <div class="p-3 bg-white text-center">
+                        <p class="text-green-700 font-bold">مراقبة المحاصيل بالدرون</p>
+                    </div>
+                </div>
+                
+                <!-- صورة 2: مزارع مع جهاز لوحي -->
+                <div class="overflow-hidden rounded-2xl shadow-lg" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=500&h=400&fit=crop" 
+                         alt="مزارع يستخدم التكنولوجيا"
+                         class="w-full h-64 object-cover cursor-pointer hover:scale-110 transition duration-500">
+                    <div class="p-3 bg-white text-center">
+                        <p class="text-green-700 font-bold">الزراعة الذكية بالتابلت</p>
+                    </div>
+                </div>
+                
+                <!-- صورة 3: حقل قمح واسع -->
+                <div class="overflow-hidden rounded-2xl shadow-lg" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?w=500&h=400&fit=crop" 
+                         alt="حقل قمح واسع"
+                         class="w-full h-64 object-cover cursor-pointer hover:scale-110 transition duration-500">
+                    <div class="p-3 bg-white text-center">
+                        <p class="text-green-700 font-bold">حقول الإنتاج الواسعة</p>
+                    </div>
+                </div>
+                
+                <!-- صورة 4: نظام الري بالتنقيط -->
+                <div class="overflow-hidden rounded-2xl shadow-lg" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=500&h=400&fit=crop" 
+                         alt="نظام الري الذكي"
+                         class="w-full h-64 object-cover cursor-pointer hover:scale-110 transition duration-500">
+                    <div class="p-3 bg-white text-center">
+                        <p class="text-green-700 font-bold">أنظمة الري الذكية</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- صف ثاني من الصور -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 image-gallery">
+                <!-- صورة 5: حساسات التربة -->
+                <div class="overflow-hidden rounded-2xl shadow-lg" data-aos="zoom-in" data-aos-delay="400">
+                    <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=500&h=400&fit=crop" 
+                         alt="حساسات التربة الذكية"
+                         class="w-full h-64 object-cover cursor-pointer hover:scale-110 transition duration-500">
+                    <div class="p-3 bg-white text-center">
+                        <p class="text-green-700 font-bold">حساسات قياس رطوبة التربة</p>
+                    </div>
+                </div>
+                
+                <!-- صورة 6: دفيئة زراعية -->
+                <div class="overflow-hidden rounded-2xl shadow-lg" data-aos="zoom-in" data-aos-delay="500">
+                    <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=500&h=400&fit=crop" 
+                         alt="دفيئة زراعية حديثة"
+                         class="w-full h-64 object-cover cursor-pointer hover:scale-110 transition duration-500">
+                    <div class="p-3 bg-white text-center">
+                        <p class="text-green-700 font-bold">الدفيئات الزراعية المتطورة</p>
+                    </div>
+                </div>
+                
+                <!-- صورة 7: حصاد المحاصيل -->
+                <div class="overflow-hidden rounded-2xl shadow-lg" data-aos="zoom-in" data-aos-delay="600">
+                    <img src="https://images.unsplash.com/photo-1523348837708-15c4ad6e7f1b?w=500&h=400&fit=crop" 
+                         alt="حصاد المحاصيل"
+                         class="w-full h-64 object-cover cursor-pointer hover:scale-110 transition duration-500">
+                    <div class="p-3 bg-white text-center">
+                        <p class="text-green-700 font-bold">حصاد المحاصيل بآلات حديثة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== DASHBOARD SECTION ==================== -->
+    <section id="stats-prod" class="py-20 bg-green-50">
+        <div class="container mx-auto px-4">
+            <div class="bg-white rounded-[3rem] shadow-2xl p-8 md:p-12 border border-green-100" data-aos="fade-up">
                 <div class="flex flex-col lg:flex-row gap-12">
                     <div class="lg:w-1/3">
                         <div class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
@@ -305,6 +370,10 @@
                                 <i class="fas fa-check-circle text-green-500 text-xl"></i>
                                 <span>توقعات الإنتاج حسب الموسم</span>
                             </li>
+                            <li class="flex items-center gap-3 text-green-800">
+                                <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                                <span>تحليل بيانات الطقس والمناخ</span>
+                            </li>
                         </ul>
                     </div>
                     <div class="lg:w-2/3 bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
@@ -315,62 +384,7 @@
         </div>
     </section>
 
-    <!-- ==================== GOALS SECTION (أهداف المشروع - حسب المذكرة) ==================== -->
-    <section id="about" class="py-20 bg-green-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="bg-green-200 text-green-800 px-4 py-1 rounded-full text-sm font-bold">أهداف المشروع</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-green-900 mt-4">ماذا نطمح إلى تحقيقه؟</h2>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition flex items-start gap-4" data-aos="fade-up">
-                    <i class="fas fa-chart-line text-green-500 text-3xl"></i>
-                    <div>
-                        <h3 class="font-bold text-green-800 text-lg">تحسين الإنتاجية الزراعية</h3>
-                        <p class="text-gray-500 text-sm">زيادة المردودية وتحسين جودة المحاصيل باستخدام أنظمة حديثة</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition flex items-start gap-4" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-tint text-green-500 text-3xl"></i>
-                    <div>
-                        <h3 class="font-bold text-green-800 text-lg">ترشيد استخدام الموارد</h3>
-                        <p class="text-gray-500 text-sm">تحسين استغلال المياه والحفاظ على الموارد الطبيعية</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition flex items-start gap-4" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-coins text-green-500 text-3xl"></i>
-                    <div>
-                        <h3 class="font-bold text-green-800 text-lg">تقليل التكاليف</h3>
-                        <p class="text-gray-500 text-sm">خفض الخسائر وزيادة الكفاءة الاقتصادية للمزارعين</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition flex items-start gap-4" data-aos="fade-up" data-aos-delay="300">
-                    <i class="fas fa-globe text-green-500 text-3xl"></i>
-                    <div>
-                        <h3 class="font-bold text-green-800 text-lg">دعم التنمية المستدامة</h3>
-                        <p class="text-gray-500 text-sm">تحقيق توازن بين الإنتاج الزراعي والحفاظ على البيئة</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition flex items-start gap-4" data-aos="fade-up" data-aos-delay="400">
-                    <i class="fas fa-microchip text-green-500 text-3xl"></i>
-                    <div>
-                        <h3 class="font-bold text-green-800 text-lg">دعم التحول الرقمي</h3>
-                        <p class="text-gray-500 text-sm">إدماج التقنيات الحديثة في النشاط الزراعي</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition flex items-start gap-4" data-aos="fade-up" data-aos-delay="500">
-                    <i class="fas fa-briefcase text-green-500 text-3xl"></i>
-                    <div>
-                        <h3 class="font-bold text-green-800 text-lg">خلق فرص عمل جديدة</h3>
-                        <p class="text-gray-500 text-sm">توفير مناصب شغل في التكنولوجيا والخدمات الفلاحية</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== FOOTER محسن ==================== -->
+    <!-- ==================== FOOTER ==================== -->
     <footer class="bg-green-950 text-white pt-16 pb-8">
         <div class="container mx-auto px-4">
             <div class="grid md:grid-cols-4 gap-8 mb-12 text-right">
@@ -380,13 +394,18 @@
                         <h3 class="text-2xl font-bold">AgriFuture</h3>
                     </div>
                     <p class="text-green-300 text-sm leading-relaxed">منصة رقمية متكاملة لبناء مستقبل زراعي أكثر ذكاءً واستدامة.</p>
+                    <div class="flex gap-4 mt-6">
+                        <img src="https://cdn-icons-png.flaticon.com/512/196/196578.png" class="h-8 bg-white rounded-lg p-1" alt="Visa">
+                        <img src="https://cdn-icons-png.flaticon.com/512/196/196565.png" class="h-8 bg-white rounded-lg p-1" alt="MasterCard">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2489/2489756.png" class="h-8 bg-white rounded-lg p-1" alt="Payment">
+                    </div>
                 </div>
                 <div>
                     <h4 class="font-bold text-lg mb-4">روابط سريعة</h4>
                     <ul class="space-y-2 text-green-300 text-sm">
                         <li><a href="#home" class="hover:text-white transition">الرئيسية</a></li>
                         <li><a href="#services" class="hover:text-white transition">خدماتنا</a></li>
-                        <li><a href="#about" class="hover:text-white transition">عن المشروع</a></li>
+                        <li><a href="#gallery" class="hover:text-white transition">معرض الصور</a></li>
                     </ul>
                 </div>
                 <div>
