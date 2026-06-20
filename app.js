@@ -2,15 +2,17 @@
 // Shared functionality for all pages
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Loader
+    // Loader - إخفاء شاشة التحميل
     const loader = document.getElementById('loader');
     if (loader) {
-        window.addEventListener('load', () => {
+        // إخفاء سريع بعد تحميل الصفحة
+        setTimeout(() => {
+            loader.style.opacity = '0';
+            loader.style.transition = 'opacity 0.5s ease';
             setTimeout(() => {
-                loader.style.opacity = '0';
-                setTimeout(() => { loader.style.display = 'none'; }, 700);
-            }, 800);
-        });
+                loader.style.display = 'none';
+            }, 500);
+        }, 1000);
     }
 
     // Mobile Menu Toggle
@@ -43,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
         let current = '';
         document.querySelectorAll('section').forEach(s => {
-            if (scrollY >= s.offsetTop - 150) {
+            if (window.scrollY >= s.offsetTop - 150) {
                 current = s.getAttribute('id');
             }
         });
@@ -55,19 +57,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Lazy Loading for images
-    const lazyImages = document.querySelectorAll('img[data-src]');
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
-        lazyImages.forEach(img => imageObserver.observe(img));
-    }
+    console.log('AgriFuture app.js loaded successfully');
 });
