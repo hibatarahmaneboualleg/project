@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم | AgriFuture</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+        * { font-family: 'Cairo', sans-serif; }
+        .sidebar { transition: transform 0.3s ease; }
+    </style>
+</head>
+<body class="bg-gray-100 flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="sidebar w-64 bg-green-900 text-white p-6 flex flex-col gap-8 fixed md:static inset-y-0 right-0 z-40 transform translate-x-full md:translate-x-0 shadow-2xl">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <img src="https://cdn-icons-png.flaticon.com/512/2909/2909768.png" class="w-8 h-8 invert" alt="AgriFuture">
+                <span class="text-xl font-black">AgriFuture</span>
+            </div>
+            <button id="closeSidebar" class="md:hidden text-white text-2xl"><i class="fas fa-times"></i></button>
+        </div>
+        <nav class="flex flex-col gap-4 font-semibold">
+            <a href="#" class="flex items-center gap-3 bg-green-700 p-3 rounded-xl"><i class="fas fa-th-large"></i> الرئيسية</a>
+            <a href="#" class="flex items-center gap-3 hover:bg-green-800 p-3 rounded-xl transition"><i class="fas fa-leaf"></i> المحاصيل</a>
+            <a href="#" class="flex items-center gap-3 hover:bg-green-800 p-3 rounded-xl transition"><i class="fas fa-water"></i> الري</a>
+            <a href="#" class="flex items-center gap-3 hover:bg-green-800 p-3 rounded-xl transition"><i class="fas fa-chart-bar"></i> التقارير</a>
+            <a href="#" class="flex items-center gap-3 hover:bg-green-800 p-3 rounded-xl transition"><i class="fas fa-cog"></i> الإعدادات</a>
+        </nav>
+        <div class="mt-auto flex flex-col gap-3">
+            <a href="index.html" class="text-green-200 hover:text-white transition"><i class="fas fa-home ml-2"></i> العودة للرئيسية</a>
+            <button id="logoutBtn" class="bg-red-600 hover:bg-red-700 py-2 rounded-xl font-bold transition">تسجيل الخروج</button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6 md:p-8 overflow-x-hidden">
+        <button id="menuToggle" class="md:hidden text-green-900 text-3xl mb-4"><i class="fas fa-bars"></i></button>
+
+        <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+            <div>
+                <h1 class="text-3xl font-black text-green-900" id="userGreeting">أهلاً بك!</h1>
+                <p class="text-gray-500">نظرة عامة على مزرعتك الذكية</p>
+            </div>
+            <div class="flex gap-2 items-center">
+                <span class="bg-green-100 text-green-700 px-4 py-1.5 rounded-full font-bold text-sm"><i class="fas fa-sun ml-1"></i> اليوم</span>
+                <div class="w-10 h-10 rounded-full bg-green-200"></div>
+            </div>
+        </header>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-green-100"><i class="fas fa-tint text-blue-500 text-2xl mb-2"></i><h3 class="text-gray-500 text-sm">رطوبة التربة</h3><p class="text-2xl font-black">68%</p></div>
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-green-100"><i class="fas fa-thermometer-half text-red-500 text-2xl mb-2"></i><h3 class="text-gray-500 text-sm">درجة الحرارة</h3><p class="text-2xl font-black">32°م</p></div>
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-green-100"><i class="fas fa-seedling text-green-500 text-2xl mb-2"></i><h3 class="text-gray-500 text-sm">صحة المحصول</h3><p class="text-2xl font-black">94%</p></div>
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-green-100"><i class="fas fa-water text-cyan-500 text-2xl mb-2"></i><h3 class="text-gray-500 text-sm">استهلاك المياه</h3><p class="text-2xl font-black">120 ل</p></div>
+        </div>
+
+        <!-- Charts & Alerts Grid -->
+        <div class="grid lg:grid-cols-3 gap-6 mb-8">
+            <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm"><h2 class="font-black text-xl mb-4">نمو الإنتاج الزراعي</h2><canvas id="growthChart" height="200"></canvas></div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm">
+                <h2 class="font-black text-xl mb-4">تنبيهات ذكية</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3 p-3 bg-red-50 rounded-xl border border-red-100"><i class="fas fa-exclamation-triangle text-red-500"></i><span>انخفاض رطوبة التربة في الحقل 2</span></div>
+                    <div class="flex items-center gap-3 p-3 bg-yellow-50 rounded-xl border border-yellow-100"><i class="fas fa-temperature-high text-yellow-500"></i><span>تحذير ارتفاع حرارة</span></div>
+                    <div class="flex items-center gap-3 p-3 bg-blue-50 rounded-xl border border-blue-100"><i class="fas fa-clock text-blue-500"></i><span>موعد الري القادم: 6 ساعات</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Crop Table -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm mb-8 overflow-x-auto">
+            <h2 class="font-black text-xl mb-4">إدارة المحاصيل</h2>
+            <table class="w-full text-right min-w-[600px]">
+                <thead class="bg-green-50 text-green-700"><tr><th class="p-3">المحصول</th><th class="p-3">المساحة</th><th class="p-3">نسبة النمو</th><th class="p-3">الحالة</th></tr></thead>
+                <tbody>
+                    <tr class="border-b"><td class="p-3 font-bold">قمح</td><td class="p-3">12 هكتار</td><td class="p-3">85%</td><td class="p-3"><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">ممتاز</span></td></tr>
+                    <tr class="border-b"><td class="p-3 font-bold">شعير</td><td class="p-3">8 هكتار</td><td class="p-3">70%</td><td class="p-3"><span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-bold">جيد</span></td></tr>
+                    <tr><td class="p-3 font-bold">بطاطا</td><td class="p-3">5 هكتار</td><td class="p-3">45%</td><td class="p-3"><span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-bold">يحتاج متابعة</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="flex gap-4 flex-wrap">
+            <button class="bg-green-600 text-white px-6 py-3 rounded-xl font-bold shadow hover:bg-green-700 transition"><i class="fas fa-plus ml-2"></i>إضافة محصول</button>
+            <button class="bg-white text-green-700 px-6 py-3 rounded-xl font-bold border border-green-300 shadow hover:bg-green-50 transition"><i class="fas fa-file-pdf ml-2"></i>تقرير</button>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="assets/js/notifications.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script>
+        // Protect this page
+        if (!Auth.protectPage()) { /* Redirect happens */ } else {
+            const user = Auth.getUser();
+            document.getElementById('userGreeting').innerHTML = `أهلاً بك، ${user.name}!`;
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            showInfo('جاري تسجيل الخروج...');
+            setTimeout(() => { Auth.logout(); }, 500);
+        });
+
+        // Mobile Sidebar Toggle
+        const sidebar = document.querySelector('.sidebar');
+        document.getElementById('menuToggle').addEventListener('click', () => sidebar.classList.add('translate-x-0'));
+        document.getElementById('closeSidebar').addEventListener('click', () => sidebar.classList.remove('translate-x-0'));
+
+        // Dashboard Charts
+        const ctx1 = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'line',
+            data: { labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو'], datasets: [{ label: 'إنتاج (طن)', data: [200, 400, 500, 800, 1250], borderColor: '#16a34a', borderWidth: 4, tension: 0.3 }] },
+            options: { responsive: true, plugins: { legend: { display: false } } }
+        });
+    </script>
+</body>
+</html>
