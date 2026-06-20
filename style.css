@@ -1,5 +1,4 @@
 /* assets/css/style.css */
-/* This file contains only custom styles that extend Tailwind. DO NOT import Tailwind here, it's in the HTML. */
 
 :root {
     --primary-green: #27ae60;
@@ -121,4 +120,3 @@ input:focus, textarea:focus, select:focus, button:focus-visible {
     outline: 2px solid var(--primary-green);
     outline-offset: 2px;
 }
-
