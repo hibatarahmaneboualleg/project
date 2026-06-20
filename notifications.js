@@ -1,64 +1,69 @@
 // assets/js/notifications.js
-// Professional Notification System
+// Professional Toast Notification System
 
-(function() {
-    // Create container if it doesn't exist
-    function ensureContainer() {
-        let container = document.getElementById('notification-container');
-        if (!container) {
-            container = document.createElement('div');
-            container.id = 'notification-container';
-            container.style.cssText = `
-                position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-                z-index: 10000; width: 90%; max-width: 480px; display: flex;
-                flex-direction: column; gap: 12px; pointer-events: none;
-            `;
-            document.body.appendChild(container);
-        }
-        return container;
-    }
-
-    function createToast(type, message) {
-        const container = ensureContainer();
-        const toast = document.createElement('div');
-
-        const icons = {
-            success: 'fa-circle-check',
-            error: 'fa-circle-xmark',
-            warning: 'fa-triangle-exclamation',
-            info: 'fa-circle-info'
-        };
-        const colors = {
-            success: 'bg-green-600',
-            error: 'bg-red-500',
-            warning: 'bg-yellow-500',
-            info: 'bg-blue-500'
-        };
-
-        toast.className = `flex items-center gap-3 p-4 rounded-xl shadow-2xl text-white font-bold text-sm pointer-events-auto fade-in ${colors[type]}`;
-        toast.innerHTML = `
-            <i class="fas ${icons[type]} text-xl"></i>
-            <span class="flex-1">${message}</span>
-            <button class="text-white/80 hover:text-white transition" onclick="this.parentElement.remove()">
-                <i class="fas fa-times"></i>
-            </button>
+function showToast(message, type = 'success') {
+    let container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.style.cssText = `
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
         `;
-
-        container.appendChild(toast);
-
-        // Auto-remove after 4 seconds
-        setTimeout(() => {
-            if (toast.parentNode) {
-                toast.style.opacity = '0';
-                toast.style.transition = 'opacity 0.3s ease';
-                setTimeout(() => toast.remove(), 300);
-            }
-        }, 4000);
+        document.body.appendChild(container);
     }
 
-    // Expose to global scope
-    window.showSuccess = (msg) => createToast('success', msg);
-    window.showError = (msg) => createToast('error', msg);
-    window.showWarning = (msg) => createToast('warning', msg);
-    window.showInfo = (msg) => createToast('info', msg);
-})();
+    const config = {
+        success: { bg: '#27ae60', icon: '✅' },
+        error: { bg: '#e74c3c', icon: '❌' },
+        warning: { bg: '#f39c12', icon: '⚠️' },
+        info: { bg: '#3498db', icon: 'ℹ️' }
+    };
+
+    const { bg, icon } = config[type] || config.success;
+
+    const toast = document.createElement('div');
+    toast.style.cssText = `
+        background: ${bg};
+        color: white;
+        padding: 16px 24px;
+        border-radius: 12px;
+        font-family: 'Cairo', sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        pointer-events: auto;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s ease;
+        min-width: 300px;
+        direction: rtl;
+    `;
+    toast.textContent = `${icon} ${message}`;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+    }, 10);
+
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-20px)';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+function showSuccess(msg) { showToast(msg, 'success'); }
+function showError(msg) { showToast(msg, 'error'); }
+function showWarning(msg) { showToast(msg, 'warning'); }
+function showInfo(msg) { showToast(msg, 'info'); }
