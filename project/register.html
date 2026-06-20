@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب | AgriFuture</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2909/2909768.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+        * { font-family: 'Cairo', sans-serif; }
+
+        :root {
+            --primary-green: #27ae60;
+            --light-green: #2ecc71;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            min-height: 100vh;
+        }
+
+        .register-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .btn-register {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .btn-register:hover {
+            background: #219a52;
+            transform: translateY(-2px);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
+        }
+
+        .password-toggle {
+            position: absolute;
+            left: 14px;
+            top: 42px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4">
+    <div class="register-card w-full max-w-md p-8">
+        <!-- Logo -->
+        <div class="text-center mb-8">
+            <img src="https://cdn-icons-png.flaticon.com/512/2909/2909768.png" class="w-16 h-16 mx-auto mb-3" alt="AgriFuture">
+            <h1 class="text-3xl font-black" style="color: var(--primary-green);">إنشاء حساب جديد</h1>
+            <p class="text-gray-500 mt-1">انضم إلى ثورة الزراعة الذكية</p>
+        </div>
+
+        <!-- Form -->
+        <form id="registerForm" class="space-y-4 text-right">
+            <!-- Full Name -->
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-2">الاسم الكامل</label>
+                <input type="text" id="regName" class="input-field" placeholder="الاسم الكامل" required>
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-2">البريد الإلكتروني</label>
+                <input type="email" id="regEmail" class="input-field" placeholder="example@email.com" required>
+            </div>
+
+            <!-- Password -->
+            <div class="relative">
+                <label class="block text-sm font-bold text-gray-700 mb-2">كلمة المرور</label>
+                <input type="password" id="regPassword" class="input-field" placeholder="8 أحرف على الأقل" required minlength="8">
+                <button type="button" class="password-toggle" onclick="togglePassword('regPassword', 'toggleIcon1')">
+                    <i class="fas fa-eye" id="toggleIcon1"></i>
+                </button>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="relative">
+                <label class="block text-sm font-bold text-gray-700 mb-2">تأكيد كلمة المرور</label>
+                <input type="password" id="regConfirm" class="input-field" placeholder="أعد كتابة كلمة المرور" required minlength="8">
+                <button type="button" class="password-toggle" onclick="togglePassword('regConfirm', 'toggleIcon2')">
+                    <i class="fas fa-eye" id="toggleIcon2"></i>
+                </button>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn-register">
+                <i class="fas fa-user-plus ml-2"></i> إنشاء الحساب
+            </button>
+        </form>
+
+        <!-- Links -->
+        <p class="text-center mt-6 text-gray-500">
+            لديك حساب بالفعل؟
+            <a href="login.html" class="text-green-700 font-bold hover:underline">تسجيل الدخول</a>
+        </p>
+        <a href="index.html" class="block text-center mt-3 text-gray-400 hover:text-green-600 text-sm">
+            <i class="fas fa-arrow-right ml-1"></i> العودة للرئيسية
+        </a>
+    </div>
+
+    <script src="assets/js/notifications.js"></script>
+    <script>
+        // Toggle Password Visibility
+        function togglePassword(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+
+        // Register Simulation
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const confirm = document.getElementById('regConfirm').value;
+
+            if (!name || !email || !password || !confirm) {
+                showError('يرجى ملء جميع الحقول');
+                return;
+            }
+
+            if (!email.includes('@')) {
+                showError('البريد الإلكتروني غير صالح');
+                return;
+            }
+
+            if (password.length < 8) {
+                showError('كلمة المرور يجب أن تكون 8 أحرف على الأقل');
+                return;
+            }
+
+            if (password !== confirm) {
+                showError('كلمة المرور غير متطابقة');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('agrifuture_users') || '[]');
+            users.push({ name, email, password });
+            localStorage.setItem('agrifuture_users', JSON.stringify(users));
+
+            showSuccess('تم إنشاء الحساب بنجاح');
+
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
